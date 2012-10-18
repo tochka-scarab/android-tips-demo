@@ -8,6 +8,7 @@ import com.horribile.tips.R;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -107,10 +108,13 @@ public class CustomMenu {
 				R.layout.custom_menu, null);
 
 		// Create popup window to show
-		mPopupWindow = new PopupWindow(mView, LayoutParams.FILL_PARENT,
+		mPopupWindow = new PopupWindow(mView, LayoutParams.MATCH_PARENT,
 				LayoutParams.WRAP_CONTENT, false);
 		mPopupWindow.setAnimationStyle(R.style.Animations_MenuAnimation);
-		mPopupWindow.setWidth(display.getWidth());
+		
+		Point size = new Point();
+		display.getSize(size);
+		mPopupWindow.setWidth(size.x);
 		mPopupWindow.showAtLocation(v, Gravity.BOTTOM, 0, 0);
 
 		// Add menu items
@@ -125,7 +129,7 @@ public class CustomMenu {
 
 			// create headers
 			row = new TableRow(mContext);
-			row.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+			row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
 
 			final CustomMenuItem cmi = mMenuItems.get(i);
@@ -136,7 +140,6 @@ public class CustomMenu {
 			btn.setText(cmi.getCaption());
 
 			btn.setOnClickListener(new OnClickListener() {
-				@Override
 				public void onClick(View v) {
 					mListener.MenuItemSelectedEvent(cmi.getId());
 					hide();

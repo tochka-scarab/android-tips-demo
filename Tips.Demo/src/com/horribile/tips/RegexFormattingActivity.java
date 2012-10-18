@@ -30,7 +30,6 @@ public class RegexFormattingActivity extends Activity {
         txt.addTextChangedListener(
         		new TextWatcher(){
 
-					@Override
 					public void afterTextChanged(Editable s) {
 						String value  = s.toString();
 						if(value.matches(regex))
@@ -39,12 +38,10 @@ public class RegexFormattingActivity extends Activity {
 							txt.setTextColor(Color.RED);
 					}
 
-					@Override
 					public void beforeTextChanged(CharSequence s, int start,
 							int count, int after) {
 					}
 
-					@Override
 					public void onTextChanged(CharSequence s, int start,
 							int before, int count) {
 					}

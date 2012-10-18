@@ -2,6 +2,7 @@ package com.horribile.tips.framework;
 
 import com.horribile.tips.R;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,6 +17,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.graphics.drawable.shapes.Shape;
+import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Window;
@@ -43,7 +45,7 @@ public class ErrorDialog extends Dialog {
 
 	private OnCloseListener closeListener;
 	private TextView textMessage = null;
-	
+
 	private static ErrorDialog error = null;
 
 	/**
@@ -52,6 +54,8 @@ public class ErrorDialog extends Dialog {
 	 * @param context
 	 *            Context
 	 */
+	@SuppressWarnings("deprecation")
+	@TargetApi(16)
 	protected ErrorDialog(Context context) {
 
 		super(context, android.R.style.Theme_Translucent_NoTitleBar);
@@ -93,8 +97,13 @@ public class ErrorDialog extends Dialog {
 		background.setLayerInset(1, 2, 2, 2, 2);
 
 		// Set the background
-		((LinearLayout) findViewById(R.id.alert_wrapper))
-				.setBackgroundDrawable(background);
+		if (Build.VERSION.SDK_INT >= 16) {
+			((LinearLayout) findViewById(R.id.alert_wrapper))
+					.setBackground(background);
+		} else {
+			((LinearLayout) findViewById(R.id.alert_wrapper))
+					.setBackgroundDrawable(background);
+		}
 
 		// Title
 		((TextView) findViewById(R.id.dialog_title)).setText(context
@@ -113,14 +122,13 @@ public class ErrorDialog extends Dialog {
 		((Button) findViewById(R.id.ok))
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
-					@Override
 					public void onClick(View view) {
 						ErrorDialog.this.dismiss();
 						if (ErrorDialog.this.closeListener != null)
 							ErrorDialog.this.closeListener.OnClose();
-						if(error!=null)
+						if (error != null)
 							error = null;
-						
+
 					}
 
 				});
@@ -207,34 +215,34 @@ public class ErrorDialog extends Dialog {
 			float c = shape.getWidth();
 
 			// Sides of the triangle
-			float a = (float) Math.sqrt((shape.getWidth() / 2)
+			float a =  android.util.FloatMath.sqrt((shape.getWidth() / 2)
 					* (shape.getWidth() / 2) + (shape.getHeight() / 8)
 					* (shape.getHeight() / 8));
 			float b = a;
 
 			// By Heron's formula we find the area of ​​triangle
 			float p = (a + b + c) / 2;
-			float S = (float) Math.sqrt(p * (p - a) * (p - b) * (p - c));
+			float S = android.util.FloatMath.sqrt(p * (p - a) * (p - b) * (p - c));
 
 			// Find the radius of the inscribed circle
 			float radius = (a * b * c) / (4 * S);
-			
+
 			// The rectangle to draw
 			RectF rectf = new RectF(shape.getWidth() / 2 - radius,
 					shape.getHeight() / 4 - radius * 2, shape.getWidth() / 2
 							+ radius, shape.getHeight() / 4);
-			
+
 			// Set gradient and draw an oval with it
 			float locations[] = new float[] { 0.6f, 1.0f };
 			int colors[] = new int[] { 0x05FFFFFF, 0x5FFFFFFF };
-			
+
 			int centerX = (int) shape.getWidth() / 2;
 			int centerY = (int) (-radius + shape.getHeight() / 2);
 
 			RadialGradient gradient = new RadialGradient(centerX, centerY,
 					radius, colors, locations, Shader.TileMode.CLAMP);
 			paint.setShader(gradient);
-			
+
 			canvas.drawOval(rectf, paint);
 
 			// Восстанавливаем настройки
@@ -244,11 +252,10 @@ public class ErrorDialog extends Dialog {
 		}
 
 	}
-	
+
 	@Override
-	public void onBackPressed(){
+	public void onBackPressed() {
 		((Button) findViewById(R.id.ok)).performClick();
 	}
-	
 
 }

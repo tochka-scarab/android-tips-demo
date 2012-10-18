@@ -14,7 +14,6 @@ public class MaskedWatcher implements TextWatcher {
 		mMask = mask;
 	}
 
-	@Override
 	public void afterTextChanged(Editable s) {
 		
 		String mask = mMask;
@@ -63,12 +62,10 @@ public class MaskedWatcher implements TextWatcher {
 		
 	}
 
-	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
 	}
 
-	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 	}
 

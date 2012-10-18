@@ -35,7 +35,6 @@ public class DemoActivity extends Activity {
 
 		CustomMenu.show(this, menuItems, new OnMenuItemSelectedListener() {
 
-			@Override
 			public void MenuItemSelectedEvent(Integer selection) {
 
 				Intent intent = new Intent();
@@ -58,7 +57,6 @@ public class DemoActivity extends Activity {
 					ErrorDialog.show(DemoActivity.this, "This is the error!",
 							new OnCloseListener() {
 
-								@Override
 								public void OnClose() {
 
 									Log.i("DialogsDemo",
@@ -93,7 +91,6 @@ public class DemoActivity extends Activity {
 
 		list.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
@@ -118,7 +115,6 @@ public class DemoActivity extends Activity {
 					ErrorDialog.show(DemoActivity.this, "This is the error!",
 							new OnCloseListener() {
 
-								@Override
 								public void OnClose() {
 
 									Log.i("DialogsDemo",

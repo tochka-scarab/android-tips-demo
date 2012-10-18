@@ -19,7 +19,6 @@ public class PartialRegexInputFilter implements InputFilter {
 		mPattern = Pattern.compile(pattern);
 	}	
 
-	@Override
 	public CharSequence filter(CharSequence source, int sourceStart, int sourceEnd,
 			Spanned destination, int destinationStart, int destinationEnd) {
 		

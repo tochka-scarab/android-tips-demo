@@ -36,7 +36,6 @@ public class SplashScreen extends Activity {
 				.getBackground();
 		
 		splashImageView.post(new Runnable() {
-			@Override
 			public void run() {
 				frameAnimation.start();
 			}

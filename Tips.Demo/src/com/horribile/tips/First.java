@@ -31,7 +31,6 @@ public class First extends Activity {
 		((RadioGroup) findViewById(R.id.radioGroup))
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						Intent intent;
 						switch (checkedId) {
